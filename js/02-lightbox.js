@@ -2,8 +2,7 @@ import { galleryItems } from './gallery-items.js';
 
 console.log(galleryItems);
 
-//              ADD GALLERY
-
+//                  ADD GALLERY
 
 const galleryRef = document.querySelector('.gallery');
 const cardGallery = galleryItems
