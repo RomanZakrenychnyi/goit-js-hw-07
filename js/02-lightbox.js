@@ -1,7 +1,9 @@
 import { galleryItems } from './gallery-items.js';
-// Change code below this line
 
 console.log(galleryItems);
+
+//              ADD GALLERY
+
 
 const galleryRef = document.querySelector('.gallery');
 const cardGallery = galleryItems
@@ -18,3 +20,15 @@ const cardGallery = galleryItems
   .join('');
 
 galleryRef.insertAdjacentHTML('afterbegin', cardGallery);
+
+//                 ADD LIBRARY SimpleLightbox
+
+galleryRef.addEventListener('click', onImageClick)
+
+function onImageClick(event) {
+    event.preventDefault()
+
+    if (event.target.nodeName !== 'IMG') {
+        return;
+    }
+}
