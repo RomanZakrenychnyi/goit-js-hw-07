@@ -17,18 +17,6 @@ const cardGallery = galleryItems
 
 galleryRef.insertAdjacentHTML('afterbegin', cardGallery);
 
-//                 ADD preventDefault
-
-galleryRef.addEventListener('click', onImageClick)
-
-function onImageClick(event) {
-    event.preventDefault()
-
-    if (event.target.nodeName !== 'IMG') {
-        return;
-    }
-}
-
 //                  ADD SimpleLightbox
 
 let lightbox  = new SimpleLightbox('.gallery .gallery__item', {
