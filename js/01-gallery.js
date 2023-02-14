@@ -1,42 +1,43 @@
 import { galleryItems } from './gallery-items.js';
 
-//              ADD GALLERY
+const colletionEl = document.querySelector('.gallery');
 
-const galleryRef = document.querySelector('.gallery');
-const cardGallery = galleryItems
-  .map(({ preview, original, description }) => {
-    return `<div class="gallery__item">
-               <a class = "gallery__link" href = ${original}/>
-               <img class = "gallery__image"
-               src = ${preview}
-               data-source = ${original}
-               alt = ${description} />
-               </a>
-            </div>`;
-  })
-  .join('');
+const creatColectionEl = galleryItems.map(({ preview, original, description }) => `<div class="gallery__item">
+  <a class="gallery__link" href=${original}>
+    <img
+      class="gallery__image"
+      src=${preview}
+      data-source=${original}
+      alt=${description}
+    />
+  </a>
+</div>`).join('');
 
-galleryRef.insertAdjacentHTML('afterbegin', cardGallery);
+colletionEl.insertAdjacentHTML('afterbegin', creatColectionEl); 
 
-//                FUNCTION ON CLICK
-
-galleryRef.addEventListener('click', onClickImage);
-
-function onClickImage(event) {
+const handlerClickImg = event => {
     event.preventDefault();
 
-    if (event.target.nodeName !== 'IMG') {
+    if (event.target.nodeName !== "IMG") {
         return;
     }
-    
+
     const instance = basicLightbox.create(`
-    <img src='${event.target.dataset.source}'>`);
-    instance.show();
+    <img src=${event.target.dataset.source}>`)
+
+    instance.show()
     
-    galleryRef.addEventListener('keydown', event => {
+    
+    const removeCloseModalBtn = event => {
         if (event.code === 'Escape') {
-            instance.close();
+            instance.close()
+            document.removeEventListener("keydown", removeCloseModalBtn)
         }
-        return galleryRef.removeEventListener('keydown', event)
-    })
+        console.log('key');
+    }
+
+    document.addEventListener("keydown", removeCloseModalBtn)
+
 }
+
+colletionEl.addEventListener('click', handlerClickImg);
